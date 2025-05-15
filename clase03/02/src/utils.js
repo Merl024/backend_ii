@@ -48,10 +48,7 @@ export const authToken = (req, res, next) => {
     esa palabra por un espacio y que continue con la siguiente posicion, que seria lo que viene despues del token 
     
     Token de demostracion
-    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY4MjUxMGRhZmVmYzY2OTY1ZjhmNTIxNyIsImZpcnN0TmFtZSI6Ik1lbGlzYSIsImxhc3
-    ROYW1lIjoiUml2YXMiLCJlbWFpbCI6InJpdmFzbWVsaXNhMjAyNEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRCeGhuWHZwQ2xRb3laYzVSdWQ3N1Eub09QREg5N25QT
-    mZHZDZ2ajRRYm1rQU5oQkhMcjQuRyIsImFnZSI6MTksInZlcnNpb24iOjB9LCJpYXQiOjE3NDcyODQ3NTUsImV4cCI6MTc0NzM3MTE1NX0.mcxTggP5Ol3uHKdd7UIWCt0lWP68e
-    L1eWETJCFQr_6E
+    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
     */
     const token = authHeader.split(' ')[1] // Partir el string y obtener solo la info dentro del token
