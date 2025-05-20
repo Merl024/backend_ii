@@ -36,7 +36,7 @@ router.post('/login', passport.authenticate('login', { failureRedirect: '/api/se
         //     age: req.user.age
         // };
 
-        const access_token = generateToken(user)
+        const access_token = generateToken(user) // Esto es parte de la libreria nativa
 
         res.send({ status: "Succes", payload: access_token })
 

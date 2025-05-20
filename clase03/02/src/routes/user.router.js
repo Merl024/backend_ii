@@ -15,6 +15,9 @@ router.get('/register', (req, res) => {
     res.render("register")
 })
 
+// El middleware authToken valida y autoriza si se tiene un token.
+// En caso de no tenerlo devuelve un 401
+
 router.get('/', authToken, (req, res) => {
     res.render("profile", {
         /* 
