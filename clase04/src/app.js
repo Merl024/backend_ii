@@ -1,7 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import handlebars from 'express-handlebars';
-import session from 'express-session'
 import MongoStore from 'connect-mongo' // esto es para el manejo de sessions
 import cookieParser from 'cookie-parser';
 
@@ -27,27 +26,14 @@ app.set('views', __dirname + '/views')
 app.set('view engine', 'handlebars');
 app.use(express.static(__dirname + '/public'));
 
-//Conectamos nuestra session con el file storage.
-// const fileStore = FileStore(session)
-
-// 2da parte - Session initialization
-
 const MONGO_URL = 'mongodb://localhost:27017/clase1?retryWrites=true&w=majority'
 
 // COOKIE PARSER
 app.use(cookieParser('SecretoCoder'))
 
-// Session
-// app.use(session({
-//     secret: 'CoderSecret',
-//     resave: false,
-//     saveUninitialized: false
-// }));
-
 // Middleware passport
 initializePassport()
 app.use(passport.initialize());
-// app.use(passport.session());
 
 //Definir rutas
 app.get('/ping', (req, res) => {

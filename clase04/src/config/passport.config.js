@@ -5,7 +5,6 @@ import passportLocal from 'passport-local'
 import jwtStrategy from 'passport-jwt'
 import { creatHash, isValidPassword, PRIVATE_KEY } from '../utils.js'
 import { userModel } from '../models/user.model.js'
-import router from '../routes/user.router.js'
 
 // Declaramos la estrategia
 const localStrategy = passportLocal.Strategy
@@ -54,7 +53,6 @@ const initializePassport = () => {
           
         const result = await userModel.create(newUser)
         return done(null, result)
-
         } catch (error) {
           /** Aqui se esta manejando el error, es que no se pone done(null) */
           return done("Error al registrar el usuario" + error)
@@ -62,11 +60,11 @@ const initializePassport = () => {
       }
     ))
 
-    // Login
+  // Login
 
-    /* =====================================
-    =            JWTSTRATEGY              =
-    ===================================== */
+  /* =====================================
+  =            JWTSTRATEGY              =
+  ===================================== */
 
   passport.use('jwt', new JwtStrategy(
     {
@@ -89,65 +87,18 @@ const initializePassport = () => {
     }
   ))
 
+  passport.serializeUser((user, done) => {
+      done(null, user._id)
+    })
 
-    /**
-     * 📌 Estrategia de Login de Usuarios
-     * Utilizamos 'login' como identificador de esta estrategia.
-    
-    passport.use('login', new localStrategy(
-      {
-        passReqToCallback: true, 
-        usernameField: 'email',
-      },
-      async (req, username, password, done) => {
-        try {
-          const user = await userModel.findOne({ email: username }) 
-          console.log("Usuario encontrado para login");
-          console.log(user);
-          
-          if (!user) {
-            console.log("El usuario no existe bajo el username de " + username);
-            return done(null, false)
-          }
-
-          // Valida si la contraseña es correcta
-          if(!isValidPassword(user, password)){
-            return done(null, false, { message: "Credenciales incorrectas" }) 
-          }
-          
-          return done(null, user)
-        } catch (error) {
-          return done(error)
-        }
+  passport.deserializeUser(async (id, done) => {
+      try {
+          let user = await userModel.findById(id);
+          done(null, user)
+      } catch (error) {
+          console.error("Error deserializando el usuario: " + error);
       }
-    ))
-    */ 
-   // TODO :: OJO si usamos passport-jwt lo reemplamzamos por login(localStrategy)
-  
-    
-    /*
-    * 📌 Serialización del Usuario
-    * Se ejecuta después de una autenticación exitosa.
-    * Passport almacena solo el `user._id` en la sesión en lugar de todo el objeto usuario.
-    * 
-    * Estos metodos siempre se dejan, independiente de que estrategia es
-    */
-   passport.serializeUser((user, done) => {
-    /**
-     * @param null captura el error
-     * @param user._id id del usuario traido de mongo
-     */
-    done(null, user._id)
-   })
-   passport.deserializeUser( async (id, done) => {
-    try {
-        let user = await userModel.findById(id)
-        done(null, user)
-    } catch (error) {
-        console.error("Error al deserializar el usuario:", error);
-        
-    }
-   })
+  })
 }
 
 // CREAMOS EL COOKIEEXTRACTOR

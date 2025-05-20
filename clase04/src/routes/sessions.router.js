@@ -6,18 +6,10 @@ import passport from "passport";
 const router = Router();
 
 // REGISTER 
-router.post('/register', passport.authenticate('register', { failureRedirect: '/api/sessions/fail-register' }), async (req, res) => {
-    try {
-        /* A partir de ahora las validaciones se haran en el passport */
-        res.send([{
-            status: 'Success',
-            msg: 'Usuario registrado con exito',
-            payload: req.user._id
-        }])
-
-    } catch (error) {
-        res.status(400).send({ error: error.message })
-    }
+router.post('/register', 
+    passport.authenticate('register', { failureRedirect: '/api/sessions/fail-register' , session: false }), 
+    async (req, res) => {
+        res.send({ status: "success", message: "Usuario creado con extito con ID: " });
 })
 
 // LOGIN / passport.authenticate('login', { failureRedirect: '/api/sessions/fail-login' }), 
@@ -38,7 +30,7 @@ router.post('/login', async (req, res) => {
         }
 
         const tokenUser = {
-            name: `${user.first_name} ${user.last_name}`,
+            name: `${user.firstName} ${user.lastName}`,
             email: user.email,
             age: user.age,
             role: user.role

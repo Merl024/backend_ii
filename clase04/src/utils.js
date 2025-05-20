@@ -61,37 +61,4 @@ export const authorization = (role) => {
     }
 }
 
-
-/* export const authToken = (req, res, next) => {
-    // El JWT se guarda en los header de autorizacion
-    const authHeader = req.headers.authorization
-    console.log("Token presente en el auth header");    
-    console.log(authHeader);
-    
-    // Si no existe un token 
-    if(!authHeader){
-        return res.status(401).send({error: "Usuario no autorizado o token no encontrado"})
-    }
-
-    
-    Al principio del token hay un 'Bearer', pero al momento de recibirlo no nos interesa esa palabra, por lo que hacemos una split para que elimine
-    esa palabra por un espacio y que continue con la siguiente posicion, que seria lo que viene despues del token 
-    
-    Token de demostracion
-    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-
-    const token = authHeader.split(' ')[1] // Partir el string y obtener solo la info dentro del token
-
-    // Validamos
-    jwt.verify(token, PRIVATE_KEY, (error, credential) =>{
-        if(error) return res.status(403).send({ msg: "Token invalido" })
-
-        // SI todo esta bien entonces: 
-        req.user = credential.user
-        console.log(req.user);
-        next()
-        
-    }) 
-} */
-
 export default __dirname
