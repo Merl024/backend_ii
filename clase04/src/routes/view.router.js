@@ -1,6 +1,10 @@
 import { Router } from 'express';
 import cookieParser from 'cookie-parser';
 
+/* ===============================
+   =        LOGIN HARDCODED      =
+   =============================== */
+
 const router = Router();
 
 //router.use(cookieParser());

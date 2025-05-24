@@ -35,7 +35,7 @@ router.post('/login', async (req, res) => {
             age: user.age,
             role: user.role
         };
-        const access_token = generateJWToken(tokenUser);
+        const access_token = generateToken(tokenUser);
         console.log(access_token);
 
 

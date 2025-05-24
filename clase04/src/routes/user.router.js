@@ -1,6 +1,5 @@
 import { Router } from 'express'
-import { passportCall,authorization } from '../utils.js'
-import passport from 'passport'
+import { passportCall, authorization } from '../utils.js'
 
 const router = new Router()
 
@@ -19,7 +18,7 @@ router.get('/register', (req, res) => {
 router.get('/',
     // authToken, 
     passportCall('jwt'),
-    authorization(['admin', 'user']),
+    authorization('user'),
     (req, res) => {
         res.render("profile", {
             user: req.user
