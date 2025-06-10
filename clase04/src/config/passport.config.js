@@ -49,10 +49,10 @@ const initializePassport = () => {
             email,
             age,
             password: creatHash(password) // Hasheamos la contraseña
-        }
+          }
           
-        const result = await userModel.create(newUser)
-        return done(null, result)
+          const result = await userModel.create(newUser)
+          return done(null, result)
         } catch (error) {
           /** Aqui se esta manejando el error, es que no se pone done(null) */
           return done("Error al registrar el usuario" + error)
@@ -117,6 +117,5 @@ const cookieExtractor = req => {
   }
   return token;
 }
-
 
 export default initializePassport

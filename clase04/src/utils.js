@@ -7,7 +7,7 @@ import passport from 'passport';
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-// Metodo para crear hash
+// Metodo para hashear contraseña
 export const creatHash = password => bcrypt.hashSync(password, bcrypt.genSaltSync(10)) // en genSaltSync hay que poner el costo
 
 // Metodo para comparar hash
